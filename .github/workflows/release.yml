@@ -1,0 +1,47 @@
+name: Release
+
+# Publishes to npm through the Trusted Publisher (OIDC) connection configured on
+# https://www.npmjs.com/package/dynamsoft-license-mcp/settings - no token is stored.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    # Must match the "Environment name" on the Trusted Publisher form.
+    environment: npm-publish
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Test
+        run: npm test
+
+      - name: Tag must match package.json
+        shell: bash
+        run: |
+          pkg=$(node -p "require('./package.json').version")
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$pkg" != "$tag" ]; then
+            echo "::error::package.json is $pkg but the tag is $tag"
+            exit 1
+          fi
+          echo "publishing $pkg"
+
+      # No NODE_AUTH_TOKEN on purpose: the npm CLI exchanges the GitHub OIDC token.
+      - name: Publish
+        run: npm publish --provenance --access public
