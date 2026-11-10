@@ -1,6 +1,6 @@
-{
+﻿{
   "name": "dynamsoft-license-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server that provisions Dynamsoft trial license keys through the customer portal Google sign-in and explains how to wire the key into each SDK.",
   "license": "MIT",
   "type": "module",
