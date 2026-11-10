@@ -1,9 +1,22 @@
 {
   "name": "dynamsoft-license-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server that provisions Dynamsoft trial license keys through the customer portal Google sign-in and explains how to wire the key into each SDK.",
   "license": "MIT",
   "type": "module",
+  "author": {
+    "name": "Dynamsoft",
+    "email": "support@dynamsoft.com",
+    "url": "https://www.dynamsoft.com/"
+  },
+  "homepage": "https://github.com/Dynamsoft/dynamsoft-license-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dynamsoft/dynamsoft-license-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dynamsoft/dynamsoft-license-mcp/issues"
+  },
   "engines": {
     "node": ">=22"
   },
@@ -15,6 +28,9 @@
     "docs",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "node src/index.js",
     "test": "node test/smoke.test.js",
@@ -27,6 +43,7 @@
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "dynamsoft",
     "license",
     "trial-license",
