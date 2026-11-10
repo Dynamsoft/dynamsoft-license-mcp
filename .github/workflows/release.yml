@@ -20,13 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Node 24 ships npm >= 11.5.1, which trusted publishing requires.
+      # Node 22 ships npm 10 and fails with ENEEDAUTH.
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       - name: Install
-        run: npm install --no-audit --no-fund
+        run: npm ci
 
       - name: Test
         run: npm test
@@ -40,8 +42,8 @@ jobs:
             echo "::error::package.json is $pkg but the tag is $tag"
             exit 1
           fi
-          echo "publishing $pkg"
+          echo "publishing $pkg with npm $(npm --version)"
 
-      # No NODE_AUTH_TOKEN on purpose: the npm CLI exchanges the GitHub OIDC token.
+      # No NODE_AUTH_TOKEN on purpose: npm exchanges the GitHub OIDC token.
       - name: Publish
-        run: npm publish --provenance --access public
+        run: npm publish --access public
