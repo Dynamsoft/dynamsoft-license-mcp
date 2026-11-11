@@ -31,7 +31,7 @@ This server closes that loop:
 
 ## Install
 
-Add it to any stdio MCP client (Claude Code, Cursor, Codex, Copilot CLI, DeepSeek Harness…):
+Add it to any stdio MCP client (Claude Code, Cursor, Codex, Copilot CLI…):
 
 ```json
 {
@@ -43,9 +43,6 @@ Add it to any stdio MCP client (Claude Code, Cursor, Codex, Copilot CLI, DeepSee
   }
 }
 ```
-
-For **DeepSeek Harness**, add an `mcp-client` row and raise the tool timeout above the sign-in
-wait — see [docs/dsh.md](docs/dsh.md).
 
 ## Tools
 
